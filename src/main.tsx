@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Gun from "gun";
 import "gun/sea";
 // import "gun/lib/webrtc";
@@ -36,7 +36,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       </header>
       <main>
         <GunContext gun={gun}>
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/admin/p/game/:gameId" element={<Admin />} />
@@ -50,7 +50,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
                 }
               />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </GunContext>
       </main>
       <footer>
