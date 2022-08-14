@@ -18,7 +18,7 @@ const Register = () => {
   const fingerprint = client.getFingerprint();
   const gun = useGunContext();
   const SEA = Gun.SEA;
-  console.log(nanoid(12));
+
   useEffect(() => {
     if (!params.gameId) return;
     else setGame(Games(params.gameId)?.title);
