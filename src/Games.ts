@@ -1,18 +1,14 @@
-const Games = (gameId: string | undefined) => {
-  switch (gameId) {
-    case "7UKbURnqfCUw":
-      return "Euro Track Simulator 2";
-    case "0pfZkZ7R8CZs":
-      return "DiRT 4";
-    case "Xo09iOkyw7vP":
-      return "Destiny 2";
+export const gamesList = [
+  { title: "Euro Track Simulator 2", keys: 507, id: "7UKbURnqfCUw" },
+  { title: "DiRT 4", keys: 473, id: "0pfZkZ7R8CZs" },
+  { title: "Destiny 2", keys: 59, id: "Xo09iOkyw7vP" },
+  { title: "Terraria", keys: 618, id: "vLmNQm5yft0b" },
+  { title: "Widelands", keys: 1706, id: "khKzDbzk8TE1" },
+  { title: "Xonotic", keys: 1031, id: "kNTC8eLVLpqt" },
+  { title: "Grand Theft Auto 5", keys: 0, id: "LWEqOodUF2Pg" },
+  { title: "Elden Ring", keys: 0, id: "N3yTX9edNnbf" },
+];
 
-    case "vLmNQm5yft0b":
-      return "Terraria";
-
-    default:
-      return false;
-  }
+export const Games = (gameId: string) => {
+  if (gameId) return gamesList.find((x) => x.id === gameId);
 };
-
-export default Games;

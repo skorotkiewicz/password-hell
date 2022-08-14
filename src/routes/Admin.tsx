@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useGunContext } from "../context";
 import { useParams } from "react-router-dom";
-import Games from "../Games";
+import { Games } from "../Games";
 
 const Admin = () => {
   const params = useParams();
@@ -10,7 +10,7 @@ const Admin = () => {
   const [data, setData] = useState<any>([]);
   const [info, setInfo] = useState<string>("");
   const [clients, setClients] = useState<string[]>([]);
-  const [game, setGame] = useState<string | boolean>("");
+  const [game, setGame] = useState<string | undefined>("");
   let ids: string[] = [];
   let idsClients: string[] = [];
   let gameId: string = "";
@@ -20,7 +20,7 @@ const Admin = () => {
     else gameId = params.gameId.toString();
 
     if (loaded.current === false) {
-      setGame(Games(params.gameId));
+      setGame(Games(params.gameId)?.title);
 
       gun
         .get("claim-dev")

@@ -4,11 +4,11 @@ import { ClientJS } from "clientjs";
 import axios from "axios";
 import { useGunContext } from "../context";
 import { nanoid } from "nanoid";
-import Games from "../Games";
+import { Games } from "../Games";
 
 const Register = () => {
   const params = useParams();
-  const [game, setGame] = useState<string | boolean>("");
+  const [game, setGame] = useState<string | undefined>("");
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -18,20 +18,21 @@ const Register = () => {
   const fingerprint = client.getFingerprint();
   const gun = useGunContext();
   const SEA = Gun.SEA;
-
+  console.log(nanoid(12));
   useEffect(() => {
-    setGame(Games(params.gameId));
+    if (!params.gameId) return;
+    else setGame(Games(params.gameId)?.title);
   }, []);
 
   const register = useCallback(async () => {
     let gameId: string = "";
 
+    if (!params.gameId) return;
+    else gameId = params.gameId.toString();
+
     if (password !== confirmPassword) {
       return setInfo("Passwords are not the same.");
     }
-
-    if (!params.gameId) return setInfo("game not available");
-    else gameId = params.gameId.toString();
 
     setLoading(true);
     setInfo("");
@@ -73,11 +74,8 @@ const Register = () => {
       {game ? (
         <>
           <h2>Register</h2>
-
           <div className="game claim">{game}</div>
-
           <div className="registerForm">
-            {/* <div>Your uniq ID: {fingerprint}</div> */}
             <div>
               <input
                 type="text"
@@ -102,7 +100,6 @@ const Register = () => {
               />
             </div>
             {info && <div className="info">{info}</div>}
-
             <div>
               {loading ? (
                 <button className="process">please wait</button>
